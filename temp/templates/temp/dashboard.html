@@ -1,0 +1,220 @@
+<html>
+    <meta http-equiv="refresh" content="5">
+	<head><title>Water management</title>
+	<link href='https://fonts.googleapis.com/css?family=Merienda' rel='stylesheet'>
+	<style>
+	body {
+ font-family: 'Merienda';font-size: 22px;
+}
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic);
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a, .dropbtn {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover, .dropdown:hover .dropbtn {
+    background-color: red;
+}
+
+li.dropdown {
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+body, html {
+  min-height: 100vh;
+}
+
+/*body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  color: #FFF;
+  background: -moz-linear-gradient(top,  rgba(31,35,60,1) 0%, rgba(67,71,147,1) 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(31,35,60,1)), color-stop(100%,rgba(67,71,147,1)));
+background: -webkit-linear-gradient(top,  rgba(31,35,60,1) 0%,rgba(67,71,147,1) 100%);
+background: -o-linear-gradient(top,  rgba(31,35,60,1) 0%,rgba(67,71,147,1) 100%);
+background: -ms-linear-gradient(top,  rgba(31,35,60,1) 0%,rgba(67,71,147,1) 100%);
+background: linear-gradient(to bottom,  rgba(31,35,60,1) 0%,rgba(67,71,147,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1f233c', endColorstr='#434793',GradientType=0 );
+}*/
+
+.container {
+  margin: 0 auto;
+  margin-top: 100px;
+}
+svg {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
+.title {
+  font-weight: 300;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 1em;
+  margin-bottom: 2.5em;
+}
+
+.xaxis path,
+.xaxis line,
+.yaxis path,
+.yaxis line {
+    stroke: #aaa;
+    fill: none;
+    shape-rendering: crispEdges;
+}
+
+.xaxis text,
+.yaxis text {
+    font-family: sans-serif;
+    font-size: 11px;
+    fill: #aaa;
+}
+
+.datapoint {
+    cursor: pointer;
+    stroke: #111;
+    fill: rgba(0, 150, 255, .75);
+    stroke-width: 7;
+}
+
+.lineChart {
+    fill: none;
+    stroke-width: 3;
+    stroke: rgba(100,100,100, 1);
+}
+
+.legend {
+  text-align: center;
+  font-size: 0.85em;
+  letter-spacing: 0.02em;
+  margin-bottom: 40px;
+}
+  .bloq {
+    display: inline-block;
+    padding: 8px 20px;
+    padding-bottom: 10px;
+  }
+
+  .bloq + .bloq {
+    margin-left: 4px;
+  }
+  .red{
+  	background-color:#e60000;
+  }
+  .blue {
+    background-color: #2de4e9;
+  }
+
+  .purple {
+    background-color: #6f5df6;
+  }
+
+.button1{
+	  display: inline-block;
+	  background: #2E2828;
+	  border-radius: 4px;
+	  font-family: 'Merienda';
+	  font-size: 22px;
+	  color: #FFF;
+	  padding: 8px 12px;
+	  cursor: pointer;
+	}
+.button2{
+	  display: inline-block;
+	  background: #06E805;
+	  border-radius: 4px;
+	  font-family: "arial-black";
+	  font-size: 24px;
+	  color: #FFF;
+	  padding: 8px 12px;
+	  cursor: pointer;
+	}
+	.button3{
+	  display: inline-block;
+	  background: #E80505;
+	  border-radius: 4px;
+	  font-family: "arial-black";
+	  font-size: 24px;
+	  color: #FFF;
+	  padding: 8px 12px;
+	  cursor: pointer;
+	}
+
+</style>
+	</head>
+<ul>
+  <li><a href="http://lishat.pythonanywhere.com/temp/display/">HOME PAGE</a></li>
+  <li><a href="http://lishat.pythonanywhere.com/temp/display/sensortable/">SENSOR VALUE TABLE</a></li>
+  <li class="dropdown">
+    <a href="javascript:void(0)" class="dropbtn">GRAPHS</a>
+    <div class="dropdown-content">
+      <a href="http://lishat.pythonanywhere.com/temp/display/tempgraph/">Temperature</a>
+      <a href="http://lishat.pythonanywhere.com/temp/display/humigraph/">Humidity</a>
+      <a href="http://lishat.pythonanywhere.com/temp/display/presgraph/">Pressure</a>
+      <a href="http://lishat.pythonanywhere.com/temp/display/altigraph/">Altitude</a>
+      <a href="http://lishat.pythonanywhere.com/temp/display/seprgraph/">Sea-pressure</a>
+      <a href="http://lishat.pythonanywhere.com/temp/display/soimgraph/">Soil Moisture</a>
+      <a href="http://lishat.pythonanywhere.com/temp/display/soim2graph/">Soil Moisture-2</a>
+      <a href="http://lishat.pythonanywhere.com/temp/display/walvgraph/">Water Level</a>
+      <a href="http://lishat.pythonanywhere.com/temp/display/rdrpgraph/">Rain Drop</a>
+      <a href="http://lishat.pythonanywhere.com/temp/display/sobsgraph/">Obstacle Distance</a>
+    <li><a href="http://lishat.pythonanywhere.com/temp/display/gmap/">MAP</a></li>
+    <li><a href="http://lishat.pythonanywhere.com/temp/control/">CONTROLLER</a></li>
+    </div>
+  </li>
+</ul>
+
+	<body background="http://eskipaper.com/images/dawn-wallpaper-4.jpg">
+        {% for i in all_sensors %}
+		<br><br><br><br><center><h1>{% if i.rainDrop < 300 %}<img src="https://www.weather2umbrella.com/wp-content/themes/w2u/image/svg/weather-icons/d10.svg" height="240px">{% elif i.temperature < 34 %}<img src="https://www.weather2umbrella.com/wp-content/themes/w2u/image/svg/weather-icons/d03.svg" height="240px" ></h1></center> {% else %}<img src="https://www.weather2umbrella.com/wp-content/themes/w2u/image/svg/weather-icons/d01.svg" height="240px"> {% endif %}
+			<center><font color="white"><div class="button1">Temperature:&emsp;{{i.temperature}}&nbsp;celsius</div><br><br>
+			<div class="button1">Humidity:&emsp;{{i.humidity}}&nbsp;%</div><br><br>
+			<div class="button1">Rain status:&emsp;{%if i.rainDrop < 300 %}<font color="green"> It's&nbsp;Raining.</font>{% else %}<font color="red">It's&nbsp;Not&nbsp;Raining;</font></div></center>{% endif %}
+    </div>
+
+		<br><br><br><br><br><br>
+<center><div class="button1">{% if i.soilMoisture > 20 or i.rainDrop < 300 %}<div class="button2">PLANT1:</div><font color="green"><b>&emsp;Plant is Healthy.</b></font>{% else %}<div class="button3">PLANT1:</div><font color="red"><b>&emsp;Plant is not healthy. You should water it.</b></font>{% endif %}</div>&emsp;&emsp;<div class="button1">{% if i.soilMoisture2 > 20 or i.rainDrop < 300 %} <div class="button2">PLANT2:</div>&emsp;<font color="green"><b>Plant is Healthy.</b></font>{% else %} <div class="button3">PLANT2:</div>&emsp;<font color="red"><b>Plant is not healthy. You should water it.</b></font>{% endif %}</div></center>
+
+	{% endfor %}
+	</body>
+</html>

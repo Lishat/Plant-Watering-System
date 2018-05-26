@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="refresh" content="5">
+<head>
+<style>
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic);
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a, .dropbtn {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover, .dropdown:hover .dropbtn {
+    background-color: red;
+}
+
+li.dropdown {
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+body, html {
+  min-height: 100vh;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  color: #FFF;
+  background: rgb(31,35,60);
+background: -moz-linear-gradient(top,  rgba(31,35,60,1) 0%, rgba(67,71,147,1) 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(31,35,60,1)), color-stop(100%,rgba(67,71,147,1)));
+background: -webkit-linear-gradient(top,  rgba(31,35,60,1) 0%,rgba(67,71,147,1) 100%);
+background: -o-linear-gradient(top,  rgba(31,35,60,1) 0%,rgba(67,71,147,1) 100%);
+background: -ms-linear-gradient(top,  rgba(31,35,60,1) 0%,rgba(67,71,147,1) 100%);
+background: linear-gradient(to bottom,  rgba(31,35,60,1) 0%,rgba(67,71,147,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1f233c', endColorstr='#434793',GradientType=0 );
+}
+
+.container {
+  margin: 0 auto;
+  margin-top: 100px;
+}
+svg {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
+.title {
+  font-weight: 300;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 1em;
+  margin-bottom: 2.5em;
+}
+
+.xaxis path,
+.xaxis line,
+.yaxis path,
+.yaxis line {
+    stroke: #aaa;
+    fill: none;
+    shape-rendering: crispEdges;
+}
+
+.xaxis text,
+.yaxis text {
+    font-family: sans-serif;
+    font-size: 11px;
+    fill: #aaa;
+}
+
+.datapoint {
+    cursor: pointer;
+    stroke: #111;
+    fill: rgba(0, 150, 255, .75);
+    stroke-width: 7;
+}
+
+.lineChart {
+    fill: none;
+    stroke-width: 3;
+    stroke: rgba(100,100,100, 1);
+}
+
+.legend {
+  text-align: center;
+  font-size: 0.85em;
+  letter-spacing: 0.02em;
+  margin-bottom: 40px;
+}
+  .bloq {
+    display: inline-block;
+    padding: 8px 20px;
+    padding-bottom: 10px;
+  }
+
+  .bloq + .bloq {
+    margin-left: 4px;
+  }
+  .red{
+  	background-color:#e60000;
+  }
+  .blue {
+    background-color: #2de4e9;
+  }
+
+  .purple {
+    background-color: #6f5df6;
+  }
+  </style>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+	function call(){
+	var i;
+	let w = 1000,
+		h = 300,
+		padding = 40,
+		a=[0,0,0,0,0,0,0,0,0,0]
+		for(i=0;i<10;i++)
+			a[i]=document.getElementById(String(i)).innerHTML;
+	let	dataset = [
+				[1, a[9]],
+				[2, a[8]],
+				[3, a[7]],
+				[4, a[6]],
+				[5, a[5]],
+				[6, a[4]],
+				[7, a[3]],
+				[8, a[2]],
+				[9, a[1]],
+				[10,a[0]]
+		]
+let svg = d3.select('body')
+		.append('svg')
+		.attr('width', w)
+		.attr('height', h)
+		.attr('id', 'chart')
+
+let drag = d3.behavior.drag()
+		.on("dragend", dragended)
+
+/*x scale*/
+let xScale = d3.scale.linear()
+		.domain([0, d3.max(dataset, d => d[0])])
+		.range([padding, w - padding]);
+
+/*y scale*/
+let yScale = d3.scale.linear()
+		.domain([d3.min(dataset,d => d[1])-1, d3.max(dataset, d => d[1])+1])
+		.range([h - padding, padding]);
+
+/*x axis*/
+let xAxis = d3.svg.axis()
+		.scale(xScale)
+		.orient('bottom');
+
+/*append x axis*/
+svg.append('g')
+		.attr({
+				'class': 'xaxis',
+				'transform': `translate(0, ${h - padding})`
+		})
+		.call(xAxis)
+
+/*y axis*/
+let yAxis = d3.svg.axis()
+		.scale(yScale)
+		.orient('left')
+
+/*append y axis*/
+svg.append('g')
+		.attr({
+				'class': 'yaxis',
+				'transform': `translate(${padding}, 0)`
+		})
+		.call(yAxis)
+
+/*define line*/
+let lines = d3.svg.line()
+		.x(d => xScale(d[0]))
+		.y(d => yScale(d[1]))
+		.interpolate('monotone')
+
+/*append line*/
+let path = svg.append('path')
+		.attr({
+				'd': lines(dataset),
+				'class': 'lineChart'
+		});
+
+svg.select('.lineChart')
+		.style('opacity', 0)
+		.transition()
+		.duration(2500)
+		.delay(1000)
+		.style('opacity', 1)
+
+/*add points*/
+let points = svg.selectAll('circle')
+		.data(dataset)
+		.enter()
+		.append('circle')
+		.call(drag)
+
+/*point attributes*/
+points.attr('cy', 0)
+		.transition()
+		.duration(1500)
+		.delay((d, i) => (i * 100) + 500)
+		.ease('elastic')
+		.attr({
+				'cx': d => xScale(d[0]),
+				'cy': d => yScale(d[1]),
+				'r': 7,
+				'class': 'datapoint',
+				'id': (d, i) => i
+		})
+		.style('opacity', 1)
+
+let xMax = d3.max(dataset, d => d[0]),
+		yMax = d3.max(dataset, d => d[1])
+
+function dragended() {
+		d3.select(this).classed("datapoint", true)
+				// get id of dragged point
+		let id = d3.select(this).attr('id'),
+				// get new absolute position coordinates of the point
+				xPos = d3.select(this).attr('cx'),
+				yPos = h - d3.select(this).attr('cy')
+
+		// convert absolute position coordinates relative to scales
+		//xPos = (xPos - padding) * (xMax / (w - (padding * 2)))
+		//yPos = (yPos - padding) * (yMax / (h - (padding * 2)))
+		dataset[id][0] = xPos
+		dataset[id][1] = yPos
+
+		// update line
+		svg.select('.lineChart')
+				.transition()
+				.duration(500)
+				.attr('d', lines(dataset))
+}}
+</script></head>
+<ul>
+  <li><a href="http://lishat.pythonanywhere.com/temp/display/">HOME PAGE</a></li>
+  <li><a href="http://lishat.pythonanywhere.com/temp/display/sensortable/">SENSOR VALUE TABLE</a></li>
+  <li class="dropdown">
+    <a href="javascript:void(0)" class="dropbtn">GRAPHS</a>
+    <div class="dropdown-content">
+      <a href="http://lishat.pythonanywhere.com/temp/display/tempgraph/">Temperature</a>
+      <a href="http://lishat.pythonanywhere.com/temp/display/humigraph/">Humidity</a>
+      <a href="http://lishat.pythonanywhere.com/temp/display/presgraph/">Pressure</a>
+      <a href="http://lishat.pythonanywhere.com/temp/display/altigraph/">Altitude</a>
+      <a href="http://lishat.pythonanywhere.com/temp/display/seprgraph/">Sea-pressure</a>
+      <a href="http://lishat.pythonanywhere.com/temp/display/soimgraph/">Soil Moisture</a>
+      <a href="http://lishat.pythonanywhere.com/temp/display/soim2graph/">Soil Moisture-2</a>
+      <a href="http://lishat.pythonanywhere.com/temp/display/walvgraph/">Water Level</a>
+      <a href="http://lishat.pythonanywhere.com/temp/display/rdrpgraph/">Rain Drop</a>
+      <a href="http://lishat.pythonanywhere.com/temp/display/sobsgraph/">Obstacle Distance</a>
+    <li><a href="http://lishat.pythonanywhere.com/temp/display/gmap/">MAP</a></li>
+    <li><a href="http://lishat.pythonanywhere.com/temp/control/">CONTROLLER</a></li>
+    </div>
+  </li>
+</ul>
+
+	{% for i in all_sensors %}
+		<p id={{i.serialId}} style="display:none">{{i.waterLevel}}</p>
+	{% endfor %}
+<div class="container" ><h1 class="title">Monitoring System</h1><div class="legend"><div class="red bloq" ><b>Water Level</b></div></div></div>
+<body onload="call()">
+</body>
+</html>

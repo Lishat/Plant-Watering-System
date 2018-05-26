@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html >
+<meta http-equiv="refresh" content="5">
+<head>
+  <meta charset="UTF-8" >
+  <title>TASK-JS SENSOR VALUE TABLE </title>
+
+</head>
+<style>
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a, .dropbtn {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover, .dropdown:hover .dropbtn {
+    background-color: red;
+}
+
+li.dropdown {
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.42em;
+  color:#A7A1AE;
+  background-color:#122734;
+}
+
+h1 {
+  font-size:3em;
+  font-weight: 300;
+  line-height:1em;
+  text-align: center;
+  color: #FB667A;
+}
+
+h2 {
+  font-size:1em;
+  font-weight: 300;
+  text-align: center;
+  display: block;
+  line-height:1em;
+  padding-bottom: 2em;
+  color: #FB667A;
+}
+
+h2 a {
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #FB667A;
+  text-decoration: none;
+}
+
+.blue { color: #185875; }
+.yellow { color: #FFF842; }
+
+.container th h1 {
+	  font-weight: bold;
+	  font-size: 1em;
+  text-align: left;
+  color: #185875;
+}
+
+.container td {
+	  font-weight: normal;
+	  font-size: 1em;
+  -webkit-box-shadow: 0 2px 2px -2px #0E1119;
+	   -moz-box-shadow: 0 2px 2px -2px #0E1119;
+	        box-shadow: 0 2px 2px -2px #0E1119;
+}
+
+.container {
+	  text-align: left;
+	  overflow: hidden;
+	  width: 80%;
+	  margin: 0 auto;
+  display: table;
+  padding: 0 0 8em 0;
+}
+
+.container td, .container th {
+	  padding-bottom: 2%;
+	  padding-top: 2%;
+  padding-left:2%;
+}
+
+/* Background-color of the odd rows */
+.container tr:nth-child(odd) {
+	  background-color: #323C50;
+}
+
+/* Background-color of the even rows */
+.container tr:nth-child(even) {
+	  background-color: #2C3446;
+}
+
+.container th {
+	  background-color: #1F2739;
+}
+
+
+.container tr:hover {
+   background-color: #464A52;
+-webkit-box-shadow: 0 6px 6px -6px #0E1119;
+	   -moz-box-shadow: 0 6px 6px -6px #0E1119;
+	        box-shadow: 0 6px 6px -6px #0E1119;
+}
+
+.container td:hover {
+  background-color: #FFF812;
+  color: #403E10;
+  font-weight: bold;
+
+  box-shadow: #123456 -1px 1px, #123456 -2px 2px, #123456 -3px 3px, #123456 -4px 4px, #123456 -5px 5px, #123456 -6px 6px;
+  transform: translate3d(6px, -6px, 0);
+
+  transition-delay: 0s;
+	  transition-duration: 0.4s;
+	  transition-property: all;
+  transition-timing-function: line;
+}
+
+</style>
+<ul>
+  <li><a href="http://lishat.pythonanywhere.com/temp/display/">HOME PAGE</a></li>
+  <li><a href="http://lishat.pythonanywhere.com/temp/display/sensortable/">SENSOR VALUE TABLE</a></li>
+  <li class="dropdown">
+    <a href="javascript:void(0)" class="dropbtn">GRAPHS</a>
+    <div class="dropdown-content">
+      <a href="http://lishat.pythonanywhere.com/temp/display/tempgraph/">Temperature</a>
+      <a href="http://lishat.pythonanywhere.com/temp/display/humigraph/">Humidity</a>
+      <a href="http://lishat.pythonanywhere.com/temp/display/presgraph/">Pressure</a>
+      <a href="http://lishat.pythonanywhere.com/temp/display/altigraph/">Altitude</a>
+      <a href="http://lishat.pythonanywhere.com/temp/display/seprgraph/">Sea-pressure</a>
+      <a href="http://lishat.pythonanywhere.com/temp/display/soimgraph/">Soil Moisture</a>
+      <a href="http://lishat.pythonanywhere.com/temp/display/soim2graph/">Soil Moisture-2</a>
+      <a href="http://lishat.pythonanywhere.com/temp/display/walvgraph/">Water Level</a>
+      <a href="http://lishat.pythonanywhere.com/temp/display/rdrpgraph/">Rain Drop</a>
+      <a href="http://lishat.pythonanywhere.com/temp/display/sobsgraph/">Obstacle Distance</a>
+    <li><a href="http://lishat.pythonanywhere.com/temp/display/gmap/">MAP</a></li>
+    <li><a href="http://lishat.pythonanywhere.com/temp/control/">CONTROLLER</a></li>
+    </div>
+  </li>
+</ul>
+<body>
+  <h1><span class="yellow">SENSOR VALUE TABLE</span></h1>
+
+
+<table class="container">
+	<thead>
+		<tr>
+			<th><h1>Temperature(in C)</h1></th>
+			<th><h1>Humidity(in %)</h1></th>
+			<th><h1>Pressure(in Pascal)</h1></th>
+      <th><h1>Altitude(in m)</h1></th>
+      <th><h1>Sea Pressure(in Pascal)</h1></th>
+      <th><h1>Soil Moisture(in %)</h1></th>
+      <th><h1>Soil Moisture 2(in %)</h1></th>
+      <th><h1>Water Level(in mm)</h1></th>
+      <th><h1>Rain drop Sensor (in units)</h1></th>
+      <th><h1>Obstacle Distance(in cm)</h1></th>
+      <th><h1>Time and Date</h1></th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for i in all_sensors %}
+    <tr><td>{{i.temperature}}</td><td>{{i.humidity}}</td><td>{{i.pressure}}</td><td>{{i.altitude}}</td><td>{{i.seaPressure}}</td><td>{{i.soilMoisture}}</td><td>{{i.soilMoisture2}}</td><td>{{i.waterLevel}}</td><td>{{i.rainDrop}}</td><td>{{i.ultrasonic}}</td><td>{{i.time}}</td></tr>
+{% endfor %}
+
+	</tbody>
+</table>
+
+
+</body>
+</html>
